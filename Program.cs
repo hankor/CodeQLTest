@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
+builder.Services.AddControllers();
 
 var app = builder.Build();
 
@@ -24,7 +25,7 @@ app.MapGet("/SanitizedWithFinding", ([FromServices] ILogger logger, [FromQuery] 
 });
 
 app.MapRazorPages();
-
+app.MapControllers();
 app.Run();
 
 

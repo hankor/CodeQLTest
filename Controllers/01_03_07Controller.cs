@@ -6,6 +6,7 @@ namespace CodeQLTest.Controllers
     [Route("01_03_07")]
     public class BAM01_03_07Controller : Controller
     {
+        [HttpGet]
         [Route("")]
         public async Task<IActionResult> Index([FromQuery] string path)
         {
