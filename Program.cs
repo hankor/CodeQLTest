@@ -1,25 +1,29 @@
 using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddRazorPages();
+
 var app = builder.Build();
 
-app.MapGet("/Finding", (ILogger logger, [FromQuery] string UserInput) =>
+app.MapGet("/Finding", ([FromServices] ILogger logger, [FromQuery] string UserInput) =>
 {
     logger.LogInformation("Unsanitized user input " + UserInput);
     return "Hello World!";
 });
 
-app.MapGet("/Sanitized", (ILogger logger, [FromQuery] string UserInput) =>
+app.MapGet("/Sanitized", ([FromServices] ILogger logger, [FromQuery] string UserInput) =>
 {
     logger.LogInformation("Sanitized user input " + UserInput.Replace(Environment.NewLine, string.Empty));
     return "Hello World!";
 });
 
-app.MapGet("/SanitizedWithFinding", (ILogger logger, [FromQuery] string UserInput) =>
+app.MapGet("/SanitizedWithFinding", ([FromServices] ILogger logger, [FromQuery] string UserInput) =>
 {
     logger.LogInformation("Sanitized user input" + logger.Sanitize(UserInput));
     return "Hello World!";
 });
+
+app.MapRazorPages();
 
 app.Run();
 
