@@ -2,7 +2,7 @@
 @model CodeQLTest.Pages.IndexModel
 <html>
 <body>
-    @using (Html.BeginForm())
+    @using (Html.BeginForm(antiforgery: false))
     {
         @Html.EditorFor(model => model.User.FirstName)
         <input type="submit" value="Save" />

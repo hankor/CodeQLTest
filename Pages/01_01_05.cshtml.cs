@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using CodeQLTest.Pages;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -5,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CodeQLTest.Pages
 {
+    [IgnoreAntiforgeryToken]
     public class IndexModel : PageModel
     {
         [BindProperty]
@@ -24,6 +26,8 @@ namespace CodeQLTest.Pages
 
     public class BAMUser
     {
+        [Key]
+        public int UserId { get; set; }
         public string FirstName { get; set; }
 
         public bool IsAdmin { get; set; }
