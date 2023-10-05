@@ -1,6 +1,7 @@
-using System.Text.Json;
+using CodeQLTest.Pages;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 
 namespace CodeQLTest.Pages
 {
@@ -15,7 +16,9 @@ namespace CodeQLTest.Pages
 
         public void OnPost()
         {
-            System.IO.File.WriteAllText("C:\\tmp\\01_01_05.txt", JsonSerializer.Serialize(User));
+            var context = new DatabaseContext();
+            context.Users.Add(User);
+            context.SaveChanges();
         }
     }
 
@@ -25,4 +28,12 @@ namespace CodeQLTest.Pages
 
         public bool IsAdmin { get; set; }
     }
+}
+
+public class DatabaseContext : DbContext
+{
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        => optionsBuilder.UseSqlServer("Data Source=.; Initial Catalog=Test; User Id=test; Password=test; TrustServerCertificate=True;");
+
+    public DbSet<BAMUser> Users { get; set; }
 }
