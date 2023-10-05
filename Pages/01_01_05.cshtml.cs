@@ -12,10 +12,8 @@ namespace CodeQLTest.Pages
         [BindProperty]
         public BAMUser User { get; set; }
 
-        public void OnGet(string input)
+        public void OnGet()
         {
-            var context = new DatabaseContext();
-            context.Users.FromSqlRaw("SELECT * FROM Users WHERE FirstName = '" + input + "'");
         }
 
         public void OnPost()
